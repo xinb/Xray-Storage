@@ -16,7 +16,7 @@ jobs:
       - name: 对比检查版本号
         run: |
           for i in {1..1000}
-          do done
+          do
             TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
             wget https://raw.githubusercontent.com/XTLS/Xray-core/main/core/core.go
             VERSION=$(grep version ./core.go| head -n 1| cut -d = -f2| tr -d \"' ')
