@@ -184,6 +184,7 @@ jobs:
           asset_name: Xray-core ${{ env.TAG }}
           file: ./*.zip*
           tag: ${{ env.TAG }}
+          overwrite: true
           file_glob: true
   UploadCode:
     runs-on: ubuntu-20.04
