@@ -20,7 +20,7 @@ jobs:
             TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
             wget https://raw.githubusercontent.com/XTLS/Xray-core/main/core/core.go
             VERSION=$(grep version ./core.go| head -n 1| cut -d = -f2| tr -d \"' ')
-            if [ $TAG == $VERSION ]
+            if [ $TAG != v$VERSION ]
               then
               echo "找到更新！，更新版本为" v$VERSION "，即将写入version文件！"
               sed -i '/v/ s/'$TAG'/v'$VERSION'/' .github/build/version
