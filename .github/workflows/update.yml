@@ -37,7 +37,7 @@ jobs:
             j=(expr $j + 1)
             sleep 20s
           done
-          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "TAG=v$VERSION" >> $GITHUB_ENV
       - name: Pull Changes
         uses: actions-go/push@master
         with:
