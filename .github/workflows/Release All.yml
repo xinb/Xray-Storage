@@ -6,6 +6,8 @@ on:
   # 当master分支提交时
   workflow_dispatch:
   push: #推送version，开始编译
+    branches:
+      - main
     paths:
       - '.github/build/version'
 # 开始任务
