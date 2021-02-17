@@ -187,6 +187,8 @@ jobs:
   UploadCode:
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v2
       - name: Prepare Code
         run: |
           echo "TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
