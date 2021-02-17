@@ -1,4 +1,4 @@
-name: 编译指定版本并保存
+name: 编译指定Tag
 env:
   TZ: Asia/Shanghai
 
@@ -179,7 +179,8 @@ jobs:
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          #repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.TOKEN }}
           asset_name: Xray-core ${{ env.TAG }}
           file: ./*.zip*
           tag: ${{ env.TAG }}
@@ -199,7 +200,8 @@ jobs:
       - name: Upload Code to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          #repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.TOKEN }}
           asset_name: Xray-core ${{ env.TAG }}
           file: ./*.zip*
           tag: ${{ env.TAG }}
