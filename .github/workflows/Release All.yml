@@ -100,7 +100,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Get Code to Build
         run: |
-          wget https://raw.githubusercontent.com/xinb/Xray-Storage/main/.github/build/version
           echo "TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
           TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
           rm version
@@ -191,8 +190,8 @@ jobs:
     steps:
       - name: Prepare Code
         run: |
-          wget https://raw.githubusercontent.com/xinb/Xray-Storage/main/.github/build/version
           echo "TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
+          TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
           git clone --branch $TAG https://github.com/XTLS/Xray-core.git
           zip -9vr ./Code-Xray-$TAG.zip ./Xray-core
 
