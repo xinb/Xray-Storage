@@ -101,7 +101,7 @@ jobs:
       - name: Get Code to Build
         run: |
           wget https://raw.githubusercontent.com/xinb/Xray-Storage/main/.github/build/version
-          echo "TAG=$(cat "./version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
+          echo "TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
           TAG=$(cat "./version" | head -1 | tr -d [:space:])
           rm version
           git clone --branch $TAG https://github.com/XTLS/Xray-core.git
