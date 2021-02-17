@@ -46,6 +46,7 @@ jobs:
       - name: Pull Changes
         uses: actions-go/push@master
         with:
+          token: ${{ secrets.TOKEN }}
           commit-message: ${{ env.TAG }}
           remote: origin
         
