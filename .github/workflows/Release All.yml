@@ -102,7 +102,6 @@ jobs:
         run: |
           echo "TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
           TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
-          rm version
           git clone --branch $TAG https://github.com/XTLS/Xray-core.git
           mv ./Xray-core/* /home/runner/work/Xray-Storage/Xray-Storage
           ls
