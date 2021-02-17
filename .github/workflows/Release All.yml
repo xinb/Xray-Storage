@@ -102,7 +102,7 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/xinb/Xray-Storage/main/.github/build/version
           echo "TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
-          TAG=$(cat "./version" | head -1 | tr -d [:space:])
+          TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
           rm version
           git clone --branch $TAG https://github.com/XTLS/Xray-core.git
           mv ./Xray-core/* /home/runner/work/Xray-Storage/Xray-Storage
@@ -192,8 +192,7 @@ jobs:
       - name: Prepare Code
         run: |
           wget https://raw.githubusercontent.com/xinb/Xray-Storage/main/.github/build/version
-          TAG=$(cat "./version" | head -1 | tr -d [:space:])
-          echo "TAG=$(cat "./version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
+          echo "TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
           git clone --branch $TAG https://github.com/XTLS/Xray-core.git
           zip -9vr ./Code-Xray-$TAG.zip ./Xray-core
 
