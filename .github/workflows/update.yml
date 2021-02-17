@@ -1,0 +1,42 @@
+name: 获取最新version
+on:
+  # 当master分支提交时
+  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '* */6 * * *'
+jobs:
+  checkversion:
+    name: 检查是否有版本更新
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v2
+      
+      - name: 对比检查版本号
+        run: |
+          for i in {1..1000}
+          do done
+            TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
+            wget https://raw.githubusercontent.com/XTLS/Xray-core/main/core/core.go
+            VERSION=$(grep version ./core.go| head -n 1| cut -d = -f2| tr -d \"' ')
+            if [ $TAG == $VERSION ]
+              then
+              echo "找到更新！，更新版本为" v$VERSION "，即将写入version文件！"
+              sed -i '/v/ s/'$TAG'/v'$VERSION'/' .github/build/version
+              rm ./core.go
+              break
+            fi
+            rm ./core.go
+            echo "第" $i "次查询结果，共1000次"
+            sleep 20s
+          done
+      - name: Pull Changes
+        uses: actions-go/push@master
+        with:
+          commit-message: v$TAG
+          remote: origin
+        
+
+          
+
