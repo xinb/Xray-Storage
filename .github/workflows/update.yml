@@ -15,6 +15,7 @@ jobs:
       
       - name: 对比检查版本号
         run: |
+          j=1
           for i in {1..1000}
           do
             TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
@@ -28,13 +29,19 @@ jobs:
               break
             fi
             rm ./core.go
+            if [$j == 10 ]
+            then
             echo "第" $i "次查询结果，共1000次"
+            $j=0
+            fi
+            j=(expr $j + 1)
             sleep 20s
           done
+          echo "TAG=v$TAG" >> $GITHUB_ENV
       - name: Pull Changes
         uses: actions-go/push@master
         with:
-          commit-message: v$TAG
+          commit-message: ${{ env.TAG }}
           remote: origin
         
 
