@@ -39,7 +39,7 @@ jobs:
             echo "第" $i "次查询结果，共1024次"
             $j=0
             fi
-            j=(expr $j + 1)
+            j=$(expr $j + 1)
             sleep 20s
           done
           echo "TAG=v$VERSION" >> $GITHUB_ENV
