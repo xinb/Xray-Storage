@@ -49,6 +49,8 @@ jobs:
           token: ${{ secrets.TOKEN }}
           commit-message: ${{ env.TAG }}
           remote: origin
+          author-name: github-actions
+          author-email: github-actions@users.noreply.github.com
         
 
           
