@@ -104,10 +104,17 @@ jobs:
         run: |
           echo "TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])" >> $GITHUB_ENV
           TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
-          git clone --branch $TAG https://github.com/XTLS/Xray-core.git
+          TAG_URL="https://api.github.com/repos/xtls/Xray-core/releases/latest"
+          NEW_VER=$(curl -s "${TAG_URL}" --connect-timeout 10| grep 'tag_name' | cut -d\" -f4)
+          if [ $TAG != $NEW_VER ]
+            then
+            git clone https://github.com/XTLS/Xray-core.git
+            else
+            git clone --branch $TAG https://github.com/XTLS/Xray-core.git
+          fi
+          echo "此次编译的版本为："
+          echo $(grep version ./core.go| head -n 1| cut -d = -f2| tr -d \"' ')
           mv ./Xray-core/* /home/runner/work/Xray-Storage/Xray-Storage
-          ls
-
       - name: Show workflow information 
         id: get_filename
         run: |

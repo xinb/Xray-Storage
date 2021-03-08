@@ -31,6 +31,7 @@ jobs:
               echo "找到更新！，更新版本为" v$VERSION "，即将写入version文件！"
               sed -i '/v/ s/'$TAG'/v'$VERSION'/' .github/build/version
               rm ./core.go
+              sleep 2m
               break
             fi
             rm ./core.go
