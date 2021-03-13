@@ -24,7 +24,7 @@ jobs:
           for i in {1..1060}
           do
             TAG=$(cat ".github/build/version" | head -1 | tr -d [:space:])
-            wget https://raw.githubusercontent.com/XTLS/Xray-core/main/core/core.go
+            wget --tries=10 https://raw.githubusercontent.com/XTLS/Xray-core/main/core/core.go
             VERSION=$(grep version ./core.go| head -n 1| cut -d = -f2| tr -d \"' ')
             if [ $TAG != v$VERSION ]
               then
