@@ -113,7 +113,7 @@ jobs:
             git clone --branch $TAG https://github.com/XTLS/Xray-core.git
           fi
           echo "此次编译的版本为："
-          echo $(grep version ./Xray-core/core.go| head -n 1| cut -d = -f2| tr -d \"' ')
+          echo $(grep version ./Xray-core/core/core.go| head -n 1| cut -d = -f2| tr -d \"' ')
           mv ./Xray-core/* /home/runner/work/Xray-Storage/Xray-Storage
       - name: Show workflow information 
         id: get_filename
