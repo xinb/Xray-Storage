@@ -116,6 +116,7 @@ jobs:
           cp ./test/*_client.txt ./result
 
       - name: Begin Test Vless GRPC TLS
+        if: VERSION == '1.4.0'
         run: |
           CONFIG=vless_grpc_tls
           pushd test || exit 1
