@@ -102,7 +102,22 @@ jobs:
 
       - name: Begin Test Vless TCP XTLS
         run: |
-          CONFIG=vless_tcp_tls
+          CONFIG=vless_tcp_xtls
+          pushd test || exit 1
+          wget -O proxychains.conf https://raw.githubusercontent.com/xinb/host/main/proxychains.conf
+          sed -i '/socks5/ s/10801/10805/' ./proxychains.conf
+          sudo cp ./proxychains.conf /etc/proxychains.conf
+          sleep 2s
+          iperf3 -siperf3 -s > $(echo $VERSION)-$(echo $CONFIG)_server.txt 2>&1 &
+          sleep 2s
+          proxychains  iperf3 -c 127.0.0.1 -t 10 > $(echo $VERSION)-$(echo $CONFIG)-$(date +'%Y-%m-%d')_client.txt 2>&1 &
+          sleep 13s
+          popd || exit 1
+          cp ./test/*_client.txt ./result
+
+      - name: Begin Test Vless GRPC TLS
+        run: |
+          CONFIG=vless_grpc_tls
           pushd test || exit 1
           wget -O proxychains.conf https://raw.githubusercontent.com/xinb/host/main/proxychains.conf
           sed -i '/socks5/ s/10801/10805/' ./proxychains.conf
