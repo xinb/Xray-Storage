@@ -1,0 +1,120 @@
+name: Speed Test All
+
+on:
+  workflow_dispatch:
+    inputs:
+      xrayversion:
+        description: 'Xray Version'     
+        required: true
+        default: '1.3.0'
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event.inputs.xrayversion }}
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v2
+
+      - name: Prepare Xray
+        run: |
+          mkdir test
+          pushd test || exit 1
+          wget https://github.com/XTLS/Xray-core/releases/download/v$VERSION/Xray-linux-64.zip
+          wget -O server.json https://raw.githubusercontent.com/xinb/host/main/config/server.json
+          wget -O client.json https://raw.githubusercontent.com/xinb/host/main/config/client.json
+          unzip Xray-linux-64.zip
+          mkdir server
+          mkdir client
+          cp ./client.json ./client
+          cp ./server.json ./server
+          cp ./xray ./server
+          cp ./xray ./client
+          popd || exit 1
+
+      - name: Begin Test SS_AES128
+        run: |
+          CONFIG=ss_aes128
+          sudo apt install iperf3
+          sudo apt install proxychains 
+          sudo apt install cpulimit
+          pushd test || exit 1
+          wget https://raw.githubusercontent.com/xinb/host/main/proxychains.conf
+          sed -i '/socks5/ s/10801/10801/' ./proxychains.conf
+          sudo cp ./proxychains.conf /etc/proxychains.conf
+          ./server/xray -config ./server/server.json > server.file 2>&1 &
+          
+          ./client/xray -config ./client/client.json > client.file 2>&1 &
+          cpulimit -e xray -l 60 > limit.txt 2>&1 &
+          sleep 5s
+          iperf3 -siperf3 -s > $(echo $VERSION)-$(echo $CONFIG)_server.txt 2>&1 &
+          sleep 5s
+          proxychains  iperf3 -c 127.0.0.1 -t 10 > $(echo $VERSION)-$(echo $CONFIG)-$(date +'%Y-%m-%d')_client.txt 2>&1 &
+          sleep 15s
+          popd || exit 1
+          cp ./test/*_client.txt ./result
+
+      - name: Begin Test VMESS TCP
+        run: |
+          CONFIG=vmess_tcp
+          pushd test || exit 1
+          wget -O proxychains.conf https://raw.githubusercontent.com/xinb/host/main/proxychains.conf
+          sed -i '/socks5/ s/10801/10802/' ./proxychains.conf
+          sudo cp ./proxychains.conf /etc/proxychains.conf
+          sleep 2s
+          iperf3 -siperf3 -s > $(echo $VERSION)-$(echo $CONFIG)_server.txt 2>&1 &
+          sleep 2s
+          proxychains  iperf3 -c 127.0.0.1 -t 10 > $(echo $VERSION)-$(echo $CONFIG)-$(date +'%Y-%m-%d')_client.txt 2>&1 &
+          sleep 13s
+          popd || exit 1
+          cp ./test/*_client.txt ./result
+
+      - name: Begin Test Trojan TCP TLS
+        run: |
+          CONFIG=trojan_tcp_tls
+          pushd test || exit 1
+          wget -O proxychains.conf https://raw.githubusercontent.com/xinb/host/main/proxychains.conf
+          sed -i '/socks5/ s/10801/10803/' ./proxychains.conf
+          sudo cp ./proxychains.conf /etc/proxychains.conf
+          sleep 2s
+          iperf3 -siperf3 -s > $(echo $VERSION)-$(echo $CONFIG)_server.txt 2>&1 &
+          sleep 2s
+          proxychains  iperf3 -c 127.0.0.1 -t 10 > $(echo $VERSION)-$(echo $CONFIG)-$(date +'%Y-%m-%d')_client.txt 2>&1 &
+          sleep 13s
+          popd || exit 1
+          cp ./test/*_client.txt ./result
+
+      - name: Begin Test Vless TCP TLS
+        run: |
+          CONFIG=vless_tcp_tls
+          pushd test || exit 1
+          wget -O proxychains.conf https://raw.githubusercontent.com/xinb/host/main/proxychains.conf
+          sed -i '/socks5/ s/10801/10804/' ./proxychains.conf
+          sudo cp ./proxychains.conf /etc/proxychains.conf
+          sleep 2s
+          iperf3 -siperf3 -s > $(echo $VERSION)-$(echo $CONFIG)_server.txt 2>&1 &
+          sleep 2s
+          proxychains  iperf3 -c 127.0.0.1 -t 10 > $(echo $VERSION)-$(echo $CONFIG)-$(date +'%Y-%m-%d')_client.txt 2>&1 &
+          sleep 13s
+          popd || exit 1
+          cp ./test/*_client.txt ./result
+      - name: Upload files to Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.version }}-${{ matrix.config }}
+          path: |
+            ./test/*.md
+
+      - name: Clean
+        run: |
+          rm -rf ./test
+          git add ./result/*-$(date +'%Y-%m-%d')_client.txt
+      - name: Pull Changes
+        uses: actions-go/push@master
+        with:
+          token: ${{ secrets.TOKEN }}
+          commit-message: ${{ matrix.version }}-${{ matrix.config }}
+          remote: origin
+          author-name: github-actions
+          author-email: github-actions@users.noreply.github.com
+      
