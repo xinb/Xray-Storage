@@ -24,6 +24,7 @@ jobs:
           wget -O server.json https://raw.githubusercontent.com/xinb/host/main/config/server.json
           wget -O client.json https://raw.githubusercontent.com/xinb/host/main/config/client.json
           unzip Xray-linux-64.zip
+          chmod +x xray
           mkdir server
           mkdir client
           cp ./client.json ./client
