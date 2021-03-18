@@ -7,11 +7,16 @@ on:
         description: 'Xray Version'     
         required: true
         default: '1.3.0'
+      grpc:
+        description: 'grpc ?'     
+        required: true
+        default: 'false'
 jobs:
   Test:
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ github.event.inputs.xrayversion }}
+      GRPC: ${{ github.event.inputs.grpc }}
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v2
@@ -21,8 +26,13 @@ jobs:
           mkdir test
           pushd test || exit 1
           wget https://github.com/XTLS/Xray-core/releases/download/v$VERSION/Xray-linux-64.zip
-          wget -O server.json https://raw.githubusercontent.com/xinb/host/main/config/server.json
-          wget -O client.json https://raw.githubusercontent.com/xinb/host/main/config/client.json
+          if [[ $GRPC == 'true' ]]; then
+            wget -O server.json https://raw.githubusercontent.com/xinb/host/main/config/server_grpc.json
+            wget -O client.json https://raw.githubusercontent.com/xinb/host/main/config/client_grpc.json
+          else
+            wget -O server.json https://raw.githubusercontent.com/xinb/host/main/config/server.json
+            wget -O client.json https://raw.githubusercontent.com/xinb/host/main/config/client.json
+          fi
           unzip Xray-linux-64.zip
           chmod +x xray
           mkdir server
@@ -116,7 +126,7 @@ jobs:
           cp ./test/*_client.txt ./result
 
       - name: Begin Test Vless GRPC TLS
-        if: ${{ github.event.inputs.xrayversion }} == '1.4.0'
+        if: ${{ github.event.inputs.grpc }} == 'true'
         run: |
           CONFIG=vless_grpc_tls
           pushd test || exit 1
