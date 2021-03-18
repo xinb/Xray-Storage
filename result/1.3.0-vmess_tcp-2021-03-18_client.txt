@@ -2,21 +2,21 @@ ProxyChains-3.1 (http://proxychains.sf.net)
 |S-chain|-<>-127.0.0.1:10802-<><>-127.0.0.1:5201-<><>-OK
 |S-chain|-<>-127.0.0.1:10802-<><>-127.0.0.1:5201-<><>-OK
 Connecting to host 127.0.0.1, port 5201
-[  5] local 127.0.0.1 port 46280 connected to 127.0.0.1 port 10802
+[  5] local 127.0.0.1 port 58060 connected to 127.0.0.1 port 10802
 [ ID] Interval           Transfer     Bitrate         Retr  Cwnd
-[  5]   0.00-1.00   sec   624 MBytes  5.23 Gbits/sec    0   1.56 MBytes       
-[  5]   1.00-2.00   sec   581 MBytes  4.88 Gbits/sec    1   1.62 MBytes       
-[  5]   2.00-3.00   sec   642 MBytes  5.39 Gbits/sec    0   1.62 MBytes       
-[  5]   3.00-4.00   sec   604 MBytes  5.06 Gbits/sec    2   1.62 MBytes       
-[  5]   4.00-5.00   sec   561 MBytes  4.71 Gbits/sec    1   1.62 MBytes       
-[  5]   5.00-6.00   sec   592 MBytes  4.97 Gbits/sec    0   1.75 MBytes       
-[  5]   6.00-7.00   sec   572 MBytes  4.80 Gbits/sec    0   1.75 MBytes       
-[  5]   7.00-8.00   sec   589 MBytes  4.94 Gbits/sec    2   1.75 MBytes       
-[  5]   8.00-9.00   sec   612 MBytes  5.14 Gbits/sec    0   1.75 MBytes       
-[  5]   9.00-10.00  sec   610 MBytes  5.12 Gbits/sec    3   1.75 MBytes       
+[  5]   0.00-1.00   sec   564 MBytes  4.73 Gbits/sec    1   1023 KBytes       
+[  5]   1.00-2.00   sec   580 MBytes  4.87 Gbits/sec    1   1.12 MBytes       
+[  5]   2.00-3.00   sec   572 MBytes  4.80 Gbits/sec    1   1.19 MBytes       
+[  5]   3.00-4.00   sec   470 MBytes  3.94 Gbits/sec    0   1.19 MBytes       
+[  5]   4.00-5.00   sec   482 MBytes  4.05 Gbits/sec    0   1.19 MBytes       
+[  5]   5.00-6.00   sec   541 MBytes  4.54 Gbits/sec    0   1.25 MBytes       
+[  5]   6.00-7.00   sec   536 MBytes  4.50 Gbits/sec    2   1.44 MBytes       
+[  5]   7.00-8.00   sec   511 MBytes  4.29 Gbits/sec    0   1.44 MBytes       
+[  5]   8.00-9.00   sec   514 MBytes  4.31 Gbits/sec    1   1.56 MBytes       
+[  5]   9.00-10.00  sec   511 MBytes  4.29 Gbits/sec    1   1.56 MBytes       
 - - - - - - - - - - - - - - - - - - - - - - - - -
 [ ID] Interval           Transfer     Bitrate         Retr
-[  5]   0.00-10.00  sec  5.85 GBytes  5.02 Gbits/sec    9             sender
-[  5]   0.00-10.00  sec  5.84 GBytes  5.01 Gbits/sec                  receiver
+[  5]   0.00-10.00  sec  5.16 GBytes  4.43 Gbits/sec    7             sender
+[  5]   0.00-10.00  sec  5.15 GBytes  4.42 Gbits/sec                  receiver
 
 iperf Done.
