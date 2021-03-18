@@ -1,3 +1,22 @@
 ProxyChains-3.1 (http://proxychains.sf.net)
-|S-chain|-<>-127.0.0.1:10805-<--timeout
-iperf3: error - unable to connect to server: Connection refused
+|S-chain|-<>-127.0.0.1:10805-<><>-127.0.0.1:5201-<><>-OK
+|S-chain|-<>-127.0.0.1:10805-<><>-127.0.0.1:5201-<><>-OK
+Connecting to host 127.0.0.1, port 5201
+[  5] local 127.0.0.1 port 58380 connected to 127.0.0.1 port 10805
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec   481 MBytes  4.04 Gbits/sec    0   2.00 MBytes       
+[  5]   1.00-2.00   sec   428 MBytes  3.59 Gbits/sec    1   2.00 MBytes       
+[  5]   2.00-3.00   sec   374 MBytes  3.13 Gbits/sec    1   2.00 MBytes       
+[  5]   3.00-4.00   sec   426 MBytes  3.58 Gbits/sec    1   2.00 MBytes       
+[  5]   4.00-5.00   sec   450 MBytes  3.77 Gbits/sec    0   2.00 MBytes       
+[  5]   5.00-6.00   sec   399 MBytes  3.34 Gbits/sec    1   2.00 MBytes       
+[  5]   6.00-7.00   sec   431 MBytes  3.62 Gbits/sec    2   2.00 MBytes       
+[  5]   7.00-8.00   sec   378 MBytes  3.17 Gbits/sec    1   2.00 MBytes       
+[  5]   8.00-9.00   sec   365 MBytes  3.06 Gbits/sec    2   2.00 MBytes       
+[  5]   9.00-10.00  sec   446 MBytes  3.74 Gbits/sec    1   2.00 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-10.00  sec  4.08 GBytes  3.50 Gbits/sec   10             sender
+[  5]   0.00-10.00  sec  4.07 GBytes  3.50 Gbits/sec                  receiver
+
+iperf Done.
