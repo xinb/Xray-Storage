@@ -48,7 +48,7 @@ jobs:
           ./server/xray -config ./server/server.json > server.file 2>&1 &
           
           ./client/xray -config ./client/client.json > client.file 2>&1 &
-          cpulimit -e xray -l 60 > limit.txt 2>&1 &
+          
           sleep 5s
           iperf3 -siperf3 -s > $(echo $VERSION)-$(echo $CONFIG)_server.txt 2>&1 &
           sleep 5s
