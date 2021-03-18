@@ -144,7 +144,7 @@ jobs:
       - name: Upload files to Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.version }}-${{ matrix.config }}
+          name: $${{ github.event.inputs.xrayversion }}
           path: |
             ./test/*.md
 
@@ -156,7 +156,7 @@ jobs:
         uses: actions-go/push@master
         with:
           token: ${{ secrets.TOKEN }}
-          commit-message: ${{ matrix.version }}-${{ matrix.config }}
+          commit-message: ${{ github.event.inputs.xrayversion }}
           remote: origin
           author-name: github-actions
           author-email: github-actions@users.noreply.github.com
