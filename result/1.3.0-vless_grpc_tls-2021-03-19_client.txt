@@ -1,0 +1,22 @@
+ProxyChains-3.1 (http://proxychains.sf.net)
+|S-chain|-<>-127.0.0.1:10805-<><>-127.0.0.1:5201-<><>-OK
+|S-chain|-<>-127.0.0.1:10805-<><>-127.0.0.1:5201-<><>-OK
+Connecting to host 127.0.0.1, port 5201
+[  5] local 127.0.0.1 port 53298 connected to 127.0.0.1 port 10805
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec   414 MBytes  3.47 Gbits/sec    0   1.56 MBytes       
+[  5]   1.00-2.00   sec   386 MBytes  3.24 Gbits/sec    0   1.56 MBytes       
+[  5]   2.00-3.00   sec   382 MBytes  3.21 Gbits/sec    0   1.56 MBytes       
+[  5]   3.00-4.00   sec   398 MBytes  3.33 Gbits/sec    0   1.56 MBytes       
+[  5]   4.00-5.00   sec   375 MBytes  3.15 Gbits/sec    0   1.56 MBytes       
+[  5]   5.00-6.00   sec   402 MBytes  3.37 Gbits/sec    0   1.56 MBytes       
+[  5]   6.00-7.00   sec   401 MBytes  3.37 Gbits/sec    0   1.56 MBytes       
+[  5]   7.00-8.00   sec   390 MBytes  3.27 Gbits/sec    0   1.56 MBytes       
+[  5]   8.00-9.00   sec   401 MBytes  3.37 Gbits/sec    0   1.56 MBytes       
+[  5]   9.00-10.00  sec   374 MBytes  3.13 Gbits/sec    0   1.56 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-10.00  sec  3.83 GBytes  3.29 Gbits/sec    0             sender
+[  5]   0.00-10.01  sec  3.82 GBytes  3.28 Gbits/sec                  receiver
+
+iperf Done.
