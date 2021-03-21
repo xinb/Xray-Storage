@@ -158,6 +158,6 @@ jobs:
           token: ${{ secrets.TOKEN }}
           commit-message: ${{ github.event.inputs.xrayversion }}
           remote: origin
-          author-name: github-actions
-          author-email: github-actions@users.noreply.github.com
+          author-name: xinb
+          author-email: xinb@users.noreply.github.com
       
